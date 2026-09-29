@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Usuarios registrados
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Usuarios registrados</h1>
+
+<p>
+    Bienvenido al mini-sistema de usuarios desarrollado con Flask.
+</p>
+
+
+{% if usuarios %}
+
+<table>
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Correo</th>
+            <th>Perfil</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for usuario in usuarios %}
+
+        <tr>
+            <td>
+                {{ usuario.id }}
+            </td>
+
+            <td>
+                {{ usuario.username|capitalize }}
+            </td>
+
+            <td>
+                {{ usuario.email }}
+            </td>
+
+            <td>
+                <a
+                    href="{{ url_for(
+                        'users.profile',
+                        id=usuario.id
+                    ) }}"
+                >
+                    Ver perfil
+                </a>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% else %}
+
+<p>
+    No hay usuarios registrados.
+</p>
+
+{% endif %}
+
+{% endblock %}
